@@ -1,0 +1,15 @@
+{
+  "name": "sms-sns",
+  "version": "1.0.0",
+  "description": "SMS api",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Norby Baruani",
+  "dependencies": {
+    "aws-sdk": "^2.652.0",
+    "moment": "^2.24.0",
+    "uuid": "^7.0.3"
+  }
+}

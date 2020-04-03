@@ -1,0 +1,6 @@
+'use stric';
+
+class Logger
+{
+
+}

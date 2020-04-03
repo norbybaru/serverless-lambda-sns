@@ -1,0 +1,18 @@
+resources: # CloudFormation template syntax
+  Resources:
+    smsRecordsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.database.table}
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+
+outputs:
+    database_table_name:${self:custom.database.table}
