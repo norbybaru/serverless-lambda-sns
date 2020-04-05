@@ -19,27 +19,21 @@ org: norbybaruani
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
 # frameworkVersion: "=X.X.X"
+plugins:
+  - serverless-pseudo-parameters
 
 provider:
   name: aws
   runtime: nodejs12.x
   region: eu-west-1
   stage: ${opt:stage, 'dev'}
-  iamRoleStatements:
-    - Effect: "Allow"
-      Action:
-        - "SNS:Publish"
-      Resource: { "Fn::Join" : ["", ["arn:aws:sns:::", { "Ref" : "ServerlessDeploymentBucket" } ] ]  }
-
+  role: arn:aws:iam::#{AWS::AccountId}:role/lambda-sns
+  
 custom:
   region: ${opt:region, self:provider.region}
   stage: ${opt:stage, self:provider.stage}
   database:
     table: ${self:custom.stage}-sms-record-${self:custom.region}
-
-# you can overwrite defaults here
-#  stage: dev
-#  region: us-east-1
 
 # you can add statements to the Lambda function's IAM Role here
   # iamRoleStatements:

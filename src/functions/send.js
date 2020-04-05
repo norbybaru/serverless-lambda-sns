@@ -18,15 +18,20 @@ module.exports.handle = async (data) => {
     };
 
     const smsService = new SMSService(config);
-
     const parsedData = JSON.parse( data.body );
 
-    let sms = {
-        phoneNumber: parsedData.phoneNumber,
-        message    : parsedData.message
-    };
-
     try {
+        if ( !( 'phone_number' in parsedData) || !( 'message' in parsedData)) {
+            return {
+                statusCode: 400
+            }
+        }
+    
+        let sms = {
+            phoneNumber: parsedData.phone_number,
+            message    : parsedData.message
+        };
+
         sms.id = await smsService.sendSms( sms.message, sms.phoneNumber );
 
         console.log("Message ID ", sms.id);
@@ -36,7 +41,8 @@ module.exports.handle = async (data) => {
         };
     } catch(e) {
         return {
-            statusCode: 500
+            statusCode: 500,
+            body: e
         };
     }
     
