@@ -4,8 +4,6 @@ const SMSService = require('../services/SMSService.js');
 
 module.exports.handle = async (data) => {
 
-    console.log(data);
-
     const config = {
         aws: {
             region: process.env.region
@@ -23,7 +21,18 @@ module.exports.handle = async (data) => {
     try {
         if ( !( 'phone_number' in parsedData) || !( 'message' in parsedData)) {
             return {
-                statusCode: 400
+                statusCode: 400,
+                body: JSON.stringify(
+                    {
+                      message: 'Invalid parameters',
+                      erros: {
+                          'phone_number': 'required',
+                          'message': 'required'
+                      },
+                    },
+                    null,
+                    2
+                ),
             }
         }
     
@@ -37,7 +46,14 @@ module.exports.handle = async (data) => {
         console.log("Message ID ", sms.id);
 
         return {
-            statusCode: 201
+            statusCode: 201,
+            body: JSON.stringify(
+                {
+                  message: 'Message sent to ' + sms.phoneNumber
+                },
+                null,
+                2
+            ),
         };
     } catch(e) {
         return {

@@ -12,7 +12,19 @@
 
 ### Usage
 
+- duplicate `.env.example` and rename it `.env`
+```sh
+$ cp .env.example .env
+```
+- Replace `.env` values with yours
+
+- Deploy
+```sh
+$ serverless deploy
+```
+
 1. Send Message:
+
 After your serverless stack is deployed, copy the URL with the endpoint and do a POST request. Sending a JSON with the phone number and the message you want to send to `/message/send`:
 
 ```

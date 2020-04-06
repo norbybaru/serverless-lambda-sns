@@ -21,13 +21,14 @@ org: norbybaruani
 # frameworkVersion: "=X.X.X"
 plugins:
   - serverless-pseudo-parameters
+  - serverless-dotenv-plugin
 
 provider:
   name: aws
   runtime: nodejs12.x
   region: eu-west-1
   stage: ${opt:stage, 'dev'}
-  role: arn:aws:iam::#{AWS::AccountId}:role/lambda-sns
+  role: arn:aws:iam::#{AWS::AccountId}:role/${env:AWS_IAM_ROLE}
   
 custom:
   region: ${opt:region, self:provider.region}
