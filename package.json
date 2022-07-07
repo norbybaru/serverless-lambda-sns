@@ -9,7 +9,7 @@
   "author": "Norby Baruani",
   "dependencies": {
     "aws-sdk": "^2.652.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "serverless-pseudo-parameters": "^2.5.0",
     "uuid": "^7.0.3"
   },
